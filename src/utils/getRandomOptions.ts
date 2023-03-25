@@ -17,7 +17,8 @@ export default function getRandomOptions(
 
     if (getRandomBoolean(styleOption.probability)) {
       const possibleValues = values.filter((v) => v);
-      result[key] = possibleValues[getRandomNumber(0, possibleValues.length)];
+      result[key] =
+        possibleValues[getRandomNumber(0, possibleValues.length - 1)];
     } else {
       result[key] = values[0];
     }
