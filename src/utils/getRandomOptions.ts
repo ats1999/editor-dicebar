@@ -1,4 +1,6 @@
 import type { ConfigStyleOptions, SelectedStyleOptions } from "@/types";
+import getRandomBoolean from "@/utils/getRandomBoolean";
+import getRandomNumber from "@/utils/getRandomNumber";
 
 export default function getRandomOptions(
   configStyleOptions: ConfigStyleOptions
@@ -13,7 +15,12 @@ export default function getRandomOptions(
     const styleOption = configStyleOptions[key];
     const values = styleOption.values;
 
-    result[key] = values[Math.floor(Math.random() * values.length)];
+    if (getRandomBoolean(styleOption.probability)) {
+      const possibleValues = values.filter((v) => v);
+      result[key] = possibleValues[getRandomNumber(0, possibleValues.length)];
+    } else {
+      result[key] = values[0];
+    }
   }
 
   return result;

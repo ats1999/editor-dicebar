@@ -67,6 +67,14 @@ const availableStyles: ConfigStyleCollection = {
     style: collection.miniavs,
     options: getSchemaOptions(collection.miniavs.schema ?? {}),
   },
+  notionists: {
+    style: collection.notionists,
+    options: getSchemaOptions(collection.notionists.schema ?? {}),
+  },
+  notionistsNeutral: {
+    style: collection.notionistsNeutral,
+    options: getSchemaOptions(collection.notionistsNeutral.schema ?? {}),
+  },
   openPeeps: {
     style: collection.openPeeps,
     options: getSchemaOptions(collection.openPeeps.schema ?? {}),

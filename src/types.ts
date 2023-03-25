@@ -2,6 +2,7 @@ import type { Style } from "@dicebear/core";
 
 export type ConfigStyleOption = {
   hasProbability?: boolean;
+  probability: number;
   isColor?: boolean;
   isArray?: boolean;
   values: string[];

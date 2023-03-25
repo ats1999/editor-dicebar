@@ -55,7 +55,8 @@ export default function getSchemaOptions(
     const isColor = !!key.match(/Color$/);
     const isArray = property.type === "array";
     const isBackgroundColor = key === "backgroundColor";
-    const hasProbability = properties.hasOwnProperty(`${key}Probability`);
+    const probability = properties[`${key}Probability`];
+    const hasProbability = typeof probability === "object";
 
     const values = new Set<string>();
 
@@ -107,10 +108,11 @@ export default function getSchemaOptions(
     }
 
     result[key] = {
-      values: [...values],
+      values: Array.from(values.values()),
       isColor,
       isArray,
       hasProbability,
+      probability: hasProbability ? (probability.default as number) : 100,
     };
   }
 
