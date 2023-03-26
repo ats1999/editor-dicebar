@@ -9,12 +9,24 @@ import { createAvatar } from "@/utils/createAvatar";
 import getAvatarCombinations from "@/utils/getAvatarCombinations";
 import styleCollection from "@/config/styles";
 import { useLocalStorage, useStorage } from "@vueuse/core";
+import { camelCase } from "change-case";
 
 const useMainStore = defineStore("main", () => {
   const selectedStyleName = useLocalStorage(
     "editor_style",
     Object.keys(styleCollection)[0]
   );
+
+  const selectedStyleNameByUrl = camelCase(
+    new URL(window.location.href).searchParams.get("style") ?? ""
+  );
+
+  if (
+    selectedStyleNameByUrl &&
+    Object.keys(styleCollection).includes(selectedStyleNameByUrl)
+  ) {
+    selectedStyleName.value = selectedStyleNameByUrl;
+  }
 
   const selectedStyleOptionsCollection =
     useStorage<SelectedStyleOptionsCollection>(
