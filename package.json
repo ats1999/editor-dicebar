@@ -12,8 +12,8 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@dicebear/collection": "6.0.0-beta.3",
-    "@dicebear/core": "6.0.0-beta.3",
+    "@dicebear/collection": "^6.0.0",
+    "@dicebear/core": "^6.0.0",
     "@heroicons/vue": "^2.0.16",
     "@vant/touch-emulator": "^1.4.0",
     "@vueuse/core": "^9.12.0",
