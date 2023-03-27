@@ -21,6 +21,7 @@ export default defineConfig({
     }),
     VueI18nPlugin({
       include: "./src/messages/*.json",
+      strictMessage: false,
     }),
   ],
   resolve: {
