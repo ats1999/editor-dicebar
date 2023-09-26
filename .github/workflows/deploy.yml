@@ -22,18 +22,14 @@ jobs:
         run: |
           bun run build
 
-      - name: Upload files to ftp server
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      - name: Deploy to Bunny.net
+        uses: ayeressian/bunnycdn-storage-deploy@96e259ff251df6d45f74e913c05ba870f8e061a7
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          protocol: ftps
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./dist/
-          server-dir: ${{ secrets.FTP_SERVER_DIR }}
-
-      - name: Purge CDN Cache
-        run: |
-          curl --request POST \
-            --url https://api.bunny.net/pullzone/${{ vars.CDN_PULL_ZONE }}/purgeCache \
-            --header 'AccessKey: ${{ secrets.CDN_ACCESS_KEY }}'
+          source: "docs/.vitepress/dist"
+          storageZoneName: "${{ secrets.STORAGE_NAME }}"
+          storagePassword: "${{ secrets.STORAGE_PASSWORD }}"
+          accessKey: "${{ secrets.CDN_ACCESS_KEY }}"
+          pullZoneId: "${{ secrets.PULL_ZONE_ID }}"
+          upload: "true"
+          remove: "true"
+          purgePullZone: "true"
