@@ -16,8 +16,6 @@ html,
 body,
 #app {
   height: 100%;
-  max-height: 100%;
-  overflow: hidden;
 }
 
 body {
@@ -26,6 +24,7 @@ body {
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
 }
 
 img,

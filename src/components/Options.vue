@@ -6,6 +6,10 @@ import { useI18n } from "vue-i18n";
 import Avatar from "./Avatar.vue";
 import Footer from "./Footer.vue";
 
+const props = defineProps<{
+  navOffetTop: number;
+}>();
+
 const store = useMainStore();
 const { t } = useI18n();
 
@@ -51,7 +55,13 @@ function changeOptions(options: SelectedStyleOptions) {
 
 <template>
   <div class="options">
-    <van-tabs v-model:active="selectedTab" swipeable shrink>
+    <van-tabs
+      v-model:active="selectedTab"
+      swipeable
+      shrink
+      sticky
+      :offset-top="props.navOffetTop"
+    >
       <van-tab
         v-for="(key, i) in Object.keys(tabs)"
         :key="i"
@@ -87,10 +97,7 @@ function changeOptions(options: SelectedStyleOptions) {
 .options {
   display: flex;
   flex-direction: column;
-  height: 100%;
   background-color: #fff;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
   overflow: hidden;
 
   &-body {

@@ -67,8 +67,10 @@ const metaList = computed(() => {
         <a href="https://bunny.net" target="_blank"> bunny.net (Sponsor) </a>
       </li>
     </ul>
-    <div class="footer-header">{{ t("licenses") }}</div>
-    <p class="footer-licenses">
+    <div class="footer-header" v-if="metaList.length > 0">
+      {{ t("licenses") }}
+    </div>
+    <p class="footer-licenses" v-if="metaList.length > 0">
       <template v-for="meta in metaList">
         <a :href="meta.source" target="_blank" rel="noopener noreferrer">{{
           meta.title
@@ -86,9 +88,7 @@ const metaList = computed(() => {
         >.
         {{ " " }}
       </template>
-      <template v-if="visibleStyles.length === 1">
-        Remix of the original.
-      </template>
+      <template v-if="metaList.length === 1"> Remix of the original. </template>
       <template v-else>
         - All avatars are remixes of the original works.
       </template>
