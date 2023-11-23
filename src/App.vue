@@ -72,17 +72,17 @@ watchEffect(() => (document.documentElement.lang = i18n.locale.value));
     padding: 0 20px;
     max-width: 1000px;
     top: 0;
-    z-index: 10;
+    z-index: 100;
   }
 
   &-preview {
     top: calc(v-bind("headerHeight") * 1px);
-    z-index: 5;
+    z-index: 1;
   }
 
   &-border {
     top: calc((v-bind("headerHeight") + v-bind("previewHeight")) * 1px);
-    z-index: 5;
+    z-index: 1;
 
     &::after {
       display: block;
