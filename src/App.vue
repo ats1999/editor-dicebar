@@ -77,12 +77,12 @@ watchEffect(() => (document.documentElement.lang = i18n.locale.value));
 
   &-preview {
     top: calc(v-bind("headerHeight") * 1px);
-    z-index: 10;
+    z-index: 5;
   }
 
   &-border {
     top: calc((v-bind("headerHeight") + v-bind("previewHeight")) * 1px);
-    z-index: 10;
+    z-index: 5;
 
     &::after {
       display: block;
