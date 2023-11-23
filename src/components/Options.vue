@@ -43,7 +43,14 @@ const tabs = computed(() => {
 });
 
 function changeStyleName(styleName: string) {
+  const scrollY = window.scrollY;
+
   store.selectedStyleName = styleName;
+
+  requestAnimationFrame(() => {
+    // Workaround. Scroll to the previous position after the tab is changed.
+    window.scrollTo({ top: scrollY });
+  });
 }
 
 function changeOptions(options: SelectedStyleOptions) {
