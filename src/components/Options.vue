@@ -25,13 +25,11 @@ const tabs = computed(() => {
     }>
   > = {};
 
-  if (Object.keys(store.availableStyles).length > 1) {
-    result["style"] = Object.keys(store.availableStyles).map((styleName) => ({
-      avatar: store.availableStyles[styleName][0].avatar.toString(),
-      active: store.selectedStyleName === styleName,
-      onClick: () => changeStyleName(styleName),
-    }));
-  }
+  result["style"] = Object.keys(store.availableStyles).map((styleName) => ({
+    avatar: store.availableStyles[styleName][0].avatar.toString(),
+    active: store.selectedStyleName === styleName,
+    onClick: () => changeStyleName(styleName),
+  }));
 
   for (const key in store.selectedStyleCombinations) {
     result[key] = store.selectedStyleCombinations[key].map((combination) => ({

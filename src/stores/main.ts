@@ -12,30 +12,10 @@ import { useLocalStorage, useStorage } from "@vueuse/core";
 import { camelCase } from "change-case";
 
 const useMainStore = defineStore("main", () => {
-  const fixedStyleNameByUrl = (
-    new URL(window.location.href).searchParams.get("fixedStyle") ?? ""
-  )
-    .split(",")
-    .map((v) => camelCase(v));
-
-  let possibleStyleNames = Object.keys(styleCollection).filter((key) => {
-    return (
-      0 === fixedStyleNameByUrl.length || fixedStyleNameByUrl.includes(key)
-    );
-  });
-
-  if (0 === possibleStyleNames.length) {
-    possibleStyleNames = Object.keys(styleCollection);
-  }
-
   const selectedStyleName = useLocalStorage(
     "editor_style",
-    possibleStyleNames[0]
+    Object.keys(styleCollection)[0]
   );
-
-  if (false === possibleStyleNames.includes(selectedStyleName.value)) {
-    selectedStyleName.value = possibleStyleNames[0];
-  }
 
   const selectedStyleNameByUrl = camelCase(
     new URL(window.location.href).searchParams.get("style") ?? ""
@@ -43,7 +23,7 @@ const useMainStore = defineStore("main", () => {
 
   if (
     selectedStyleNameByUrl &&
-    possibleStyleNames.includes(selectedStyleNameByUrl)
+    Object.keys(styleCollection).includes(selectedStyleNameByUrl)
   ) {
     selectedStyleName.value = selectedStyleNameByUrl;
   }
@@ -51,11 +31,14 @@ const useMainStore = defineStore("main", () => {
   const selectedStyleOptionsCollection =
     useStorage<SelectedStyleOptionsCollection>(
       `editor_avatar_options_${__dicebearEditorVersion}`,
-      possibleStyleNames.reduce<SelectedStyleOptionsCollection>((acc, key) => {
-        acc[key] = getRandomOptions(styleCollection[key].options);
+      Object.keys(styleCollection).reduce<SelectedStyleOptionsCollection>(
+        (acc, key) => {
+          acc[key] = getRandomOptions(styleCollection[key].options);
 
-        return acc;
-      }, {})
+          return acc;
+        },
+        {}
+      )
     );
 
   const selectedStyleOptions = computed({
@@ -77,10 +60,6 @@ const useMainStore = defineStore("main", () => {
 
     for (const key in styleCollection) {
       if (false === styleCollection.hasOwnProperty(key)) {
-        continue;
-      }
-
-      if (false === possibleStyleNames.includes(key)) {
         continue;
       }
 
