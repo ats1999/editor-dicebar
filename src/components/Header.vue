@@ -53,20 +53,6 @@ async function onDownload() {
     :confirm-button-text="t('close')"
   >
     <p class="header-dialog-text">{{ t("downloadStartedDescription") }}</p>
-    <p
-      v-if="styleMeta?.license?.name !== 'CC0 1.0'"
-      class="header-dialog-text"
-      v-html="
-        t('downloadStartedDescriptionLicense', {
-          title: styleMeta?.title,
-          source: styleMeta?.source,
-          creator: styleMeta?.creator,
-          homepage: styleMeta?.homepage,
-          licenseName: styleMeta?.license?.name,
-          licenseUrl: styleMeta?.license?.url,
-        })
-      "
-    ></p>
   </van-dialog>
 
   <div class="header">
