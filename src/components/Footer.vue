@@ -46,53 +46,12 @@ const metaList = computed(() => {
 
 <template>
   <div class="footer">
-    <div class="footer-header">DiceBear Editor - v.{{ version }}</div>
+    <div class="footer-header">@dasbyte Avtar Editor - v.{{ version }}</div>
     <ul class="footer-links">
       <li>
-        <a :href="t('documentationLink')" target="_blank">
-          {{ t("documentation") }}
-        </a>
-      </li>
-      <li>
-        <a :href="t('privacyPolicyLink')" target="_blank">
-          {{ t("privacyPolicy") }}
-        </a>
-      </li>
-      <li>
-        <a :href="t('siteNoticeLink')" target="_blank">
-          {{ t("siteNotice") }}
-        </a>
-      </li>
-      <li>
-        <a href="https://bunny.net" target="_blank"> bunny.net (Sponsor) </a>
+        <a href="https://dsabyte.com" target="_blank"> dsabyte.com (Sponsor) </a>
       </li>
     </ul>
-    <div class="footer-header" v-if="metaList.length > 0">
-      {{ t("licenses") }}
-    </div>
-    <p class="footer-licenses" v-if="metaList.length > 0">
-      <template v-for="meta in metaList">
-        <a :href="meta.source" target="_blank" rel="noopener noreferrer">{{
-          meta.title
-        }}</a>
-        by
-        <a :href="meta.homepage" target="_blank" rel="noopener noreferrer">{{
-          meta.creator
-        }}</a>
-        /
-        <a
-          :href="meta.license?.url"
-          target="_blank"
-          rel="noopener noreferrer"
-          >{{ meta.license?.name.replace(/\.$/, "") }}</a
-        >.
-        {{ " " }}
-      </template>
-      <template v-if="metaList.length === 1"> Remix of the original. </template>
-      <template v-else>
-        - All avatars are remixes of the original works.
-      </template>
-    </p>
   </div>
 </template>
 
